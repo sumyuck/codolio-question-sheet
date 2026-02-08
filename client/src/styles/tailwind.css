@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-xl border border-codolio-border bg-codolio-panel shadow-soft;
+  }
+  .pill {
+    @apply rounded-full border border-codolio-border bg-codolio-panelLight px-3 py-1 text-xs text-codolio-muted;
+  }
+  .accent-button {
+    @apply rounded-lg bg-codolio-accent px-4 py-2 text-sm font-semibold text-white hover:bg-codolio-accentSoft;
+  }
+  .icon-button {
+    @apply rounded-full border border-codolio-border p-2 text-codolio-muted hover:text-white;
+  }
+}
