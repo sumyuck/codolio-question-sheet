@@ -1,0 +1,30 @@
+{
+  "topics": [
+    {
+      "title": "Step 1: Learn the basics",
+      "subTopics": [
+        {
+          "title": "Lec 1: Things to know in C++/Java/Python",
+          "questions": [
+            {
+              "title": "User Input / Output",
+              "difficulty": "Basic",
+              "source": "TUF",
+              "youtubeUrl": "https://www.youtube.com/watch?v=example",
+              "notes": "",
+              "solved": false,
+              "starred": false
+            },
+            {
+              "title": "Data Types",
+              "difficulty": "Easy",
+              "source": "TUF",
+              "solved": false,
+              "starred": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
