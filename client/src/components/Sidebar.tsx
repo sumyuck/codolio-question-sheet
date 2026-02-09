@@ -26,7 +26,7 @@ const secondaryItems = [
 
 export default function Sidebar() {
   return (
-    <aside className="flex h-full w-64 flex-col border-r border-codolio-border bg-codolio-panel px-4 py-6">
+    <aside className="flex min-h-screen w-64 flex-col border-r border-codolio-border bg-codolio-panel px-4 py-6">
       <div className="mb-8 flex items-center gap-3 text-lg font-semibold">
         <BookOpen className="h-6 w-6 text-codolio-accent" />
         <span>Codolio</span>

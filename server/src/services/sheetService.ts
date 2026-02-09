@@ -15,6 +15,7 @@ const seedQuestionSchema = z
     difficulty: difficultyEnum.optional().default('Basic'),
     source: z.string().optional(),
     youtubeUrl: z.string().optional(),
+    problemUrl: z.string().optional(),
     notes: z.string().optional(),
     tags: z.array(z.string()).optional(),
     solved: z.boolean().optional().default(false),
@@ -109,6 +110,7 @@ const toQuestion = (input: z.infer<typeof seedQuestionSchema>, order: number): Q
   starred: input.starred ?? false,
   notes: input.notes ?? '',
   youtubeUrl: input.youtubeUrl ?? '',
+  problemUrl: input.problemUrl ?? '',
   tags: input.tags ?? []
 });
 
@@ -149,6 +151,19 @@ const rowToSeedQuestion = (row: any): z.infer<typeof seedQuestionSchema> => {
     normalizeString(row?.resource) ||
     '';
 
+  const problemUrl =
+    normalizeString(row?.problemUrl) ||
+    normalizeString(row?.link) ||
+    normalizeString(row?.url) ||
+    normalizeString(row?.leetcodeUrl) ||
+    normalizeString(row?.questionUrl) ||
+    normalizeString(row?.questionLink) ||
+    normalizeString(qid?.link) ||
+    normalizeString(qid?.url) ||
+    normalizeString(qid?.questionLink) ||
+    normalizeString(qid?.problemUrl) ||
+    '';
+
   const notes = normalizeString(row?.notes) || normalizeString(qid?.description) || '';
 
   const solved =
@@ -176,6 +191,7 @@ const rowToSeedQuestion = (row: any): z.infer<typeof seedQuestionSchema> => {
     source,
     difficulty,
     youtubeUrl,
+    problemUrl,
     notes,
     solved,
     starred,
