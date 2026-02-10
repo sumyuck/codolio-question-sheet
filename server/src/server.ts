@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use('/api', sheetRoutes);
 
-const clientDistPath = path.resolve(process.cwd(), 'client', 'dist');
+const clientDistPath = path.resolve(process.cwd(), '..', 'client', 'dist');
 
 app.use(express.static(clientDistPath));
 
