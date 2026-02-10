@@ -15,6 +15,7 @@ export interface Question {
   starred: boolean;
   notes?: string;
   youtubeUrl?: string;
+  problemUrl?: string;
   tags?: string[];
 }
 

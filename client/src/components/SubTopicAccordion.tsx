@@ -16,6 +16,7 @@ interface SubTopicAccordionProps {
 
 export default function SubTopicAccordion({ subTopic, topicId, onAddQuestion }: SubTopicAccordionProps) {
   const [open, setOpen] = useState(true);
+  const [visibleCount, setVisibleCount] = useState(10);
   const updateQuestion = useSheetStore((state) => state.updateQuestion);
   const updateSubTopic = useSheetStore((state) => state.updateSubTopic);
   const deleteSubTopic = useSheetStore((state) => state.deleteSubTopic);
@@ -35,6 +36,11 @@ export default function SubTopicAccordion({ subTopic, topicId, onAddQuestion }: 
     id: `questions-${subTopic.id}`,
     data: { type: 'question-list', containerId: subTopic.id }
   });
+
+  const totalQuestions = subTopic.questions.length;
+  const shouldPaginate = totalQuestions > 10;
+  const visibleQuestions = shouldPaginate ? subTopic.questions.slice(0, visibleCount) : subTopic.questions;
+  const canShowMore = visibleCount < totalQuestions;
 
   return (
     <div ref={setNodeRef} style={style} className={clsx('space-y-3', isDragging && 'opacity-70')}>
@@ -86,9 +92,9 @@ export default function SubTopicAccordion({ subTopic, topicId, onAddQuestion }: 
         </div>
       </button>
       {open && (
-        <SortableContext items={subTopic.questions.map((q) => q.id)} strategy={verticalListSortingStrategy}>
+        <SortableContext items={visibleQuestions.map((q) => q.id)} strategy={verticalListSortingStrategy}>
           <div ref={setDroppableRef} className="space-y-2 pl-8">
-            {subTopic.questions.map((question: Question) => (
+            {visibleQuestions.map((question: Question) => (
               <QuestionRow
                 key={question.id}
                 question={question}
@@ -105,6 +111,20 @@ export default function SubTopicAccordion({ subTopic, topicId, onAddQuestion }: 
                 }
               />
             ))}
+            {shouldPaginate && (
+              <div className="flex justify-center pt-2">
+                <button
+                  type="button"
+                  className="rounded-full border border-codolio-border px-4 py-1 text-xs text-codolio-muted hover:text-white"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setVisibleCount((current) => (canShowMore ? Math.min(current + 10, totalQuestions) : 10));
+                  }}
+                >
+                  {canShowMore ? 'Show more' : 'Show less'}
+                </button>
+              </div>
+            )}
           </div>
         </SortableContext>
       )}

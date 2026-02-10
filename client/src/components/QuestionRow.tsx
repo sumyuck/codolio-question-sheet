@@ -30,6 +30,14 @@ export default function QuestionRow({
     transition
   };
 
+  const hasProblemUrl = Boolean(question.problemUrl);
+  const hasYoutubeUrl = Boolean(question.youtubeUrl);
+
+  const handleOpenLink = (url: string | undefined) => {
+    if (!url) return;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div
       ref={setNodeRef}
@@ -50,7 +58,22 @@ export default function QuestionRow({
           )}
         />
         <div>
-          <p className="font-medium text-white">{question.title}</p>
+          <button
+            type="button"
+            title={hasProblemUrl ? 'Open problem link' : 'No problem link'}
+            onClick={(event) => {
+              event.stopPropagation();
+              handleOpenLink(question.problemUrl);
+            }}
+            onPointerDown={(event) => event.stopPropagation()}
+            disabled={!hasProblemUrl}
+            className={clsx(
+              'bg-transparent p-0 text-left font-medium text-white',
+              hasProblemUrl ? 'cursor-pointer hover:underline' : 'cursor-not-allowed'
+            )}
+          >
+            {question.title}
+          </button>
           <div className="mt-1 flex flex-wrap gap-2 text-xs text-codolio-muted">
             {question.source && <span className="pill">{question.source}</span>}
             <span
@@ -67,7 +90,19 @@ export default function QuestionRow({
         </div>
       </div>
       <div className="flex items-center gap-2 text-codolio-muted">
-        {isYoutube(question) && <Youtube className="h-4 w-4 text-red-500" />}
+        <button
+          type="button"
+          title={hasYoutubeUrl ? 'Open YouTube link' : 'No YouTube link'}
+          onClick={(event) => {
+            event.stopPropagation();
+            handleOpenLink(question.youtubeUrl);
+          }}
+          onPointerDown={(event) => event.stopPropagation()}
+          disabled={!hasYoutubeUrl}
+          className={clsx('icon-button', !hasYoutubeUrl && 'cursor-not-allowed opacity-60')}
+        >
+          <Youtube className={clsx('h-4 w-4', isYoutube(question) && 'text-red-500')} />
+        </button>
         <button onClick={onToggleStar} className="icon-button">
           <Star className={clsx('h-4 w-4', question.starred && 'fill-codolio-accent text-codolio-accent')} />
         </button>

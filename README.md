@@ -11,16 +11,26 @@ Codolio-like interactive question tracker with hierarchical topics, subtopics, a
 - [x] Right-side drawer editor with Overview/Notes tabs
 - [x] Search by title/source/difficulty
 - [x] Progress ring with solved/total counts
+- [x] Clickable question titles (open problem link) and YouTube icons (open video)
 - [x] Export/Import JSON
 - [x] Persistence via `server/data/state.json`
 
 ## Setup
+### Monorepo (single command)
 ```bash
 npm install
 npm run dev
 ```
 - Client: http://localhost:5173
 - Server: http://localhost:3001
+
+### Split terminals
+```bash
+npm --prefix server run dev
+```
+```bash
+npm --prefix client run dev
+```
 
 ## API Routes
 - `GET /api/sheet`
@@ -41,3 +51,9 @@ npm run dev
 - On server boot, `server/data/state.json` is loaded if it exists.
 - If missing, the server reads `server/seed/sheet.json`, transforms it into the Topic → SubTopic → Question hierarchy, and persists it to `server/data/state.json`.
 - All mutations update the persisted JSON file so the UI remains consistent after refresh/restart.
+
+### Reset seed
+To rebuild state from the seed file, delete the persisted state file and restart the server:
+```bash
+rm -f server/data/state.json
+```
