@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { ReorderPayload, SheetState } from '../types/sheet';
+import type { ReorderPayload, SheetState, Question } from '../types/sheet';
 
 export interface QuestionInput {
   title: string;

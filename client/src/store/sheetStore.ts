@@ -36,7 +36,7 @@ interface SheetStore {
 }
 
 export const useSheetStore = create<SheetStore>()(
-  devtools((set, get) => ({
+  devtools((set, _get) => ({
     sheet: null,
     loading: false,
     search: '',
