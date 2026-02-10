@@ -1,19 +1,48 @@
 # Interactive Question Management Sheet
 
-Codolio-like interactive question tracker with hierarchical topics, subtopics, and questions. Built with a Vite + React frontend and an Express + TypeScript backend.
+A single-page, Codolio-inspired **Question Tracker** that lets users manage a hierarchical sheet of **Topics → Subtopics → Questions** with full CRUD, drag-and-drop reordering, progress tracking, and a right-side editor drawer.
 
-## Features
-- [x] Dark theme with Codolio-inspired orange accents
-- [x] Accordion layout for topics and subtopics
-- [x] CRUD for topics, subtopics, and questions (via API)
-- [x] Drag-and-drop reorder for topics, subtopics, and questions
-- [x] Move questions across subtopics
-- [x] Right-side drawer editor with Overview/Notes tabs
-- [x] Search by title/source/difficulty
-- [x] Progress ring with solved/total counts
-- [x] Clickable question titles (open problem link) and YouTube icons (open video)
-- [x] Export/Import JSON
-- [x] Persistence via `server/data/state.json`
+Built as a lightweight monorepo:
+- **Client:** React + Vite + TailwindCSS + Zustand + dnd-kit
+- **Server:** Node.js + Express + TypeScript (JSON persistence, no DB required)
+
+---
+
+## Website Screenshots
+
+### 1) Sheet View (Topics → Subtopics → Questions)
+![Sheet View](docs/screenshots/sheet-view.png)
+
+### 2) Edit Question Drawer (Overview / Notes)
+![Edit Drawer](docs/screenshots/edit-drawer.png)
+
+### 3) Add Question Flow
+![Add Question](docs/screenshots/add-question.png)
+
+---
+
+## Key Features
+
+### Core Requirements 
+- **Topics:** Create / Edit / Delete
+- **Subtopics:** Create / Edit / Delete (nested under topics)
+- **Questions:** Create / Edit / Delete (nested under subtopics)
+- **Reorder with Drag & Drop**
+  - Reorder **topics**, **subtopics**, and **questions**
+  - Move **questions across subtopics**
+
+### UX & Product Polish 
+- Codolio-style **dark UI** with orange accents
+- Accordion navigation for large sheets
+- **Right-side drawer** editor with tabs: *Overview* / *Notes*
+- **Progress tracking** (solved/total)
+- **Search** (title/source/difficulty)
+- **Show More / Show Less** pagination inside a subtopic (prevents huge dumps)
+- Clickable interactions:
+  - **Question title** opens problem link (if available)
+  - **YouTube icon** opens video link (if available)
+
+---
 
 ## Setup
 ### Monorepo (single command)
